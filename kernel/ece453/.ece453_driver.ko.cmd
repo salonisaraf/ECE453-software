@@ -1,0 +1,1 @@
+cmd_/mnt/hgfs/shared/software/kernel/ece453/ece453_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /mnt/hgfs/shared/software/kernel/ece453/ece453_driver.ko /mnt/hgfs/shared/software/kernel/ece453/ece453_driver.o /mnt/hgfs/shared/software/kernel/ece453/ece453_driver.mod.o
