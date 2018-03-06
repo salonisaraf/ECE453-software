@@ -1,8 +1,8 @@
-cmd_/home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o := arm-linux-gnueabihf-gcc -Wp,-MD,/home/ece453/shared/software/kernel/ece453-irq/.ece453_driver.o.d  -nostdinc -isystem /opt/gcc-linaro-5.2-2015.11-2-x86_64_arm-linux-gnueabihf/bin/../lib/gcc/arm-linux-gnueabihf/5.2.1/include -I./arch/arm/include -Iarch/arm/include/generated/uapi -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -fno-ipa-sra -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -g -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(ece453_driver)"  -D"KBUILD_MODNAME=KBUILD_STR(ece453_driver)" -c -o /home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o /home/ece453/shared/software/kernel/ece453-irq/ece453_driver.c
+cmd_/home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.o := arm-linux-gnueabihf-gcc -Wp,-MD,/home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/.ece453_driver.o.d  -nostdinc -isystem /opt/gcc-linaro-5.2-2015.11-2-x86_64_arm-linux-gnueabihf/bin/../lib/gcc/arm-linux-gnueabihf/5.2.1/include -I./arch/arm/include -Iarch/arm/include/generated/uapi -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -fno-ipa-sra -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -g -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(ece453_driver)"  -D"KBUILD_MODNAME=KBUILD_STR(ece453_driver)" -c -o /home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.o /home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.c
 
-source_/home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o := /home/ece453/shared/software/kernel/ece453-irq/ece453_driver.c
+source_/home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.o := /home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.c
 
-deps_/home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o := \
+deps_/home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.o := \
   include/linux/kobject.h \
     $(wildcard include/config/uevent/helper.h) \
     $(wildcard include/config/debug/kobject/release.h) \
@@ -724,8 +724,8 @@ deps_/home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o := \
     $(wildcard include/config/uaccess/with/memcpy.h) \
   arch/arm/include/asm/domain.h \
     $(wildcard include/config/io/36.h) \
-  /home/ece453/shared/software/kernel/ece453-irq/ece453.h \
+  /home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453.h \
 
-/home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o: $(deps_/home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o)
+/home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.o: $(deps_/home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.o)
 
-$(deps_/home/ece453/shared/software/kernel/ece453-irq/ece453_driver.o):
+$(deps_/home/ece453/shared/Lab1-Software/SoC/ece453/software/kernel/ece453-irq/ece453_driver.o):

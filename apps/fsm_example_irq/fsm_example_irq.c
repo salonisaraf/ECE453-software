@@ -113,12 +113,12 @@ int main(int argc, char **argv)
   set_pid();
 
   // Enable the FSM.  The LED should move right to left
-  ece453_reg_write(CONTROL_REG, 0x03);
+//  ece453_reg_write(CONTROL_REG, 0x03);
 
   // enable reception of a signal the FSM reaches state 1 or 4. 
   ece453_reg_write(IM_REG, 0x01);
       
-  printf("Press KEY0 until IRQ is received\n\r");
+  printf("Toggle switch 1 until IRQ is received\n\r");
 
   /* Loop forever, waiting for interrupts */
   while (busy) {
@@ -129,12 +129,12 @@ int main(int argc, char **argv)
   // CTRL-C
 
   //Disable the FSM 
-  ece453_reg_write(CONTROL_REG, 0x0);
+//  ece453_reg_write(CONTROL_REG, 0x0);
 
   clear_pid();
 
   // Disalbe interrupts
-  ece453_reg_write(IM_REG, 0);
+//  ece453_reg_write(IM_REG, 0);
    
   return 0;
 }

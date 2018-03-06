@@ -64,18 +64,20 @@ static irqreturn_t ece453_irq_handler(int irq, void *dev_id)
   
   // Read in the current state of the FSM
   // ADD CODE
+//  fsm_state =  ioread32(base_addr + ECE453_STATUS_OFFSET);
   fsm_state =  ioread32(base_addr + ECE453_STATUS_OFFSET);
   
   // If state is equal to 1, change the direction of the LEDs from right to left
   // ADD CODE
-  if(fsm_state == 0x01) {
-	iowrite32(0x03, base_addr + ECE453_CONTROL_OFFSET);
-  }
+//  if(fsm_state == 0x01) {
+//	iowrite32(0x03, base_addr + ECE453_CONTROL_OFFSET);
+//  }
   // If state is equal to 4, change the direction of the LEDs from left to right
   // ADD CODE
-  if(fsm_state == 0x04) {
-	iowrite32(0x01, base_addr + ECE453_CONTROL_OFFSET);
-  }
+//  if(fsm_state == 0x04) {
+//	iowrite32(0x01, base_addr + ECE453_CONTROL_OFFSET);
+//  }
+
   // Clear the active interrupts, by writing 1 to that interrupt 
   // ADD CODE
   iowrite32(0x01, base_addr + ECE453_IRQ_OFFSET); 
