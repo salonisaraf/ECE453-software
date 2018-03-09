@@ -133,8 +133,8 @@ int main(int argc, char **argv)
 
   clear_pid();
 
-  // Disalbe interrupts
-//  ece453_reg_write(IM_REG, 0);
+  // Disable interrupts
+  ece453_reg_write(IM_REG, 0);
    
   return 0;
 }
