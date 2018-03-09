@@ -30,6 +30,11 @@
 
 #include "ece453.h"
 
+#include <sys/socket.h> /* socket, connect */
+#include <netinet/in.h> /* struct sockaddr_in, struct sockaddr */
+#include <netdb.h> /* struct hostent, gethostbyname */
+
+
 #define SIG_TEST 44
 
 
@@ -39,6 +44,15 @@ unsigned long remap_size;   /* Device Memory Size */
 
 static int irq;
 static int pid;
+
+int fsm_state = 0;
+volatile bool UPDATE_PAGE = false; //Checks when to load a new page based on user input
+
+//Defines to send in the GET request for which state the user is in (on  or off)
+#define PORT "443" //Since it is HTTPS
+//#define HOST  //The function we are querying
+#define GET_STATE_ON "GET /toggle?state=on HTTP/1.0\r\n\r\n"
+#define GET_STATE_OFF "GET /toggle?state=off HTTP/1.0\r\n\r\n" 
 
 /*
  * This module shows how to create a simple subdirectory in sysfs called
@@ -60,7 +74,10 @@ static irqreturn_t ece453_irq_handler(int irq, void *dev_id)
   struct siginfo info;
   struct task_struct *t;
   int ret;
-  int fsm_state = 0;
+//  int fsm_state = 0;
+  
+  //The user switched modes so update the page
+  UPDATE_PAGE = true;
   
   // Read in the current state of the FSM
   // ADD CODE
@@ -104,6 +121,26 @@ static irqreturn_t ece453_irq_handler(int irq, void *dev_id)
   
   return IRQ_HANDLED;
 }
+
+/*****************************************************************************/
+/* Functions to handle web application updates                                                           */
+/*****************************************************************************/
+
+//This method issued a GET request to load the new session page for user 
+bool new_session_page(void){
+
+	//Create a socket
+	
+	//Lookup IP address
+	
+	//Open the socket
+	
+	//Send the request based on which state the user is in message_ON = 4'd1;
+	//message_OFF = 4'd2;
+	
+	//Wait for the response
+}
+
 
 /*****************************************************************************/
 /* Read Functions                                                            */
