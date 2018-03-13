@@ -120,6 +120,7 @@ int main(int argc, char **argv)
       
   printf("Toggle switch 1 until IRQ is received\n\r");
 
+
   /* Loop forever, waiting for interrupts */
   while (busy) {
 	sleep(86400);	/* This will end early when we get an interrupt. */

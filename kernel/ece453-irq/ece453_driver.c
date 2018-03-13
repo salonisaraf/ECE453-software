@@ -30,9 +30,9 @@
 
 #include "ece453.h"
 
-#include <sys/socket.h> /* socket, connect */
-#include <netinet/in.h> /* struct sockaddr_in, struct sockaddr */
-#include <netdb.h> /* struct hostent, gethostbyname */
+//#include <sys/socket.h> /* socket, connect */
+//#include <netinet/in.h> /* struct sockaddr_in, struct sockaddr */
+//#include <netdb.h> /* struct hostent, gethostbyname */
 
 
 #define SIG_TEST 44
@@ -45,14 +45,14 @@ unsigned long remap_size;   /* Device Memory Size */
 static int irq;
 static int pid;
 
-int fsm_state = 0;
-volatile bool UPDATE_PAGE = false; //Checks when to load a new page based on user input
+//int fsm_state = 0;
+//volatile bool UPDATE_PAGE = false; //Checks when to load a new page based on user input
 
 //Defines to send in the GET request for which state the user is in (on  or off)
-#define PORT "443" //Since it is HTTPS
+//#define PORT "443" //Since it is HTTPS
 //#define HOST  //The function we are querying
-#define GET_STATE_ON "GET /toggle?state=on HTTP/1.0\r\n\r\n"
-#define GET_STATE_OFF "GET /toggle?state=off HTTP/1.0\r\n\r\n" 
+//#define GET_STATE_ON "GET /toggle?state=on HTTP/1.0\r\n\r\n"
+//#define GET_STATE_OFF "GET /toggle?state=off HTTP/1.0\r\n\r\n" 
 
 /*
  * This module shows how to create a simple subdirectory in sysfs called
@@ -74,26 +74,29 @@ static irqreturn_t ece453_irq_handler(int irq, void *dev_id)
   struct siginfo info;
   struct task_struct *t;
   int ret;
-//  int fsm_state = 0;
+  int fsm_state = 0;
   
   //The user switched modes so update the page
-  UPDATE_PAGE = true;
+  //UPDATE_PAGE = true;
   
   // Read in the current state of the FSM
   // ADD CODE
 //  fsm_state =  ioread32(base_addr + ECE453_STATUS_OFFSET);
   fsm_state =  ioread32(base_addr + ECE453_STATUS_OFFSET);
   
-  // If state is equal to 1, change the direction of the LEDs from right to left
+    // If state is equal to 1, change the direction of the LEDs from right to left
   // ADD CODE
-//  if(fsm_state == 0x01) {
-//	iowrite32(0x03, base_addr + ECE453_CONTROL_OFFSET);
-//  }
+  //If state is START
+	if(fsm_state == 0x01) {
+		iowrite32(0x01, base_addr + ECE453_CONTROL_OFFSET);
+	}
   // If state is equal to 4, change the direction of the LEDs from left to right
+  
+  //If state is STOP
   // ADD CODE
-//  if(fsm_state == 0x04) {
-//	iowrite32(0x01, base_addr + ECE453_CONTROL_OFFSET);
-//  }
+	if(fsm_state == 0x02) {
+		iowrite32(0x00, base_addr + ECE453_CONTROL_OFFSET);
+	}
 
   // Clear the active interrupts, by writing 1 to that interrupt 
   // ADD CODE
@@ -127,7 +130,7 @@ static irqreturn_t ece453_irq_handler(int irq, void *dev_id)
 /*****************************************************************************/
 
 //This method issued a GET request to load the new session page for user 
-bool new_session_page(void){
+//bool new_session_page(void){
 
 	//Create a socket
 	
@@ -139,7 +142,7 @@ bool new_session_page(void){
 	//message_OFF = 4'd2;
 	
 	//Wait for the response
-}
+//}
 
 
 /*****************************************************************************/
