@@ -120,6 +120,7 @@ int main(int argc, char **argv)
       
   printf("Please toggle slide switch 1!\n\r");
 
+
   /* Loop forever, waiting for interrupts */
   while (busy) {
 	sleep(86400);	/* This will end early when we get an interrupt. */
