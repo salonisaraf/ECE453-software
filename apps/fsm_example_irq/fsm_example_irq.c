@@ -118,7 +118,7 @@ int main(int argc, char **argv)
   // enable reception of a signal the FSM reaches state 1 or 4. 
   ece453_reg_write(IM_REG, 0x01);
       
-  printf("Toggle switch 1 until IRQ is received\n\r");
+  printf("Please toggle slide switch 1!\n\r");
 
   /* Loop forever, waiting for interrupts */
   while (busy) {
