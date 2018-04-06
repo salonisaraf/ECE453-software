@@ -15,6 +15,11 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include "../include/ece453.h"
+#include <curl/curl.h>
+
+//Sending start and end of session to web application
+#define GET_STATE_ON "https://us-central1-ece453smartstation.cloudfunctions.net/toggle?state=on"
+#define GET_STATE_OFF "https://us-central1-ece453smartstation.cloudfunctions.net/toggle?state=off"
 
 #define SIG_TEST 44 /* we define our own signal, hard coded since SIGRTMIN is different in user and in kernel space */ 
 
@@ -75,6 +80,43 @@ void receiveData(int n, siginfo_t *info, void *unused)
 {
   // Data can be passed from the kernel to the application via the info struct.
   printf("Entering State %d\n\r",info->si_int);
+    CURL *curl;
+    CURLcode res;
+    char* header_message;
+    volatile bool UPDATE_PAGE = false;
+    volatile int state = 0;
+    state = info->si_int;
+    if (state == 1){
+        header_message = GET_STATE_ON;
+    }else if (state == 2){
+        header_message = GET_STATE_OFF;
+    }
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+
+    curl = curl_easy_init();
+    if(curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, header_message);
+
+        /* Perform the request, res will get the return code */
+        res = curl_easy_perform(curl);
+        /* Check for errors */
+        if(res != CURLE_OK){
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        }else{
+	    if(state == 1){
+            	printf("Started session!");
+            }else if(state == 2){
+            	printf("Ended session!");
+            }else{
+            	printf("Session not registered!");
+            }
+        }
+
+        /* always cleanup */
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
 }
 
 //*****************************************************************************
@@ -128,9 +170,7 @@ int main(int argc, char **argv)
 
   // The only way that the application gets here is if the user presses
   // CTRL-C
-
-  //Disable the FSM 
-//  ece453_reg_write(CONTROL_REG, 0x0);
+  
 
   clear_pid();
 
