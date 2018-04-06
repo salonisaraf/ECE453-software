@@ -79,7 +79,7 @@ int clear_pid(void)
 void receiveData(int n, siginfo_t *info, void *unused)
 {
   // Data can be passed from the kernel to the application via the info struct.
-  printf("Entering State %d\n\r",info->si_int);
+  printf("\n\rEntering State %d: ",info->si_int);
     CURL *curl;
     CURLcode res;
     char* header_message;
@@ -102,14 +102,6 @@ void receiveData(int n, siginfo_t *info, void *unused)
         /* Check for errors */
         if(res != CURLE_OK){
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        }else{
-	    if(state == 1){
-            	printf("Started session!");
-            }else if(state == 2){
-            	printf("Ended session!");
-            }else{
-            	printf("Session not registered!");
-            }
         }
 
         /* always cleanup */

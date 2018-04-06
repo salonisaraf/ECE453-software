@@ -1,8 +1,8 @@
 FILENAME=fsm_example_irq
 CC=arm-linux-gnueabihf-gcc
 IDIR =../include
-CFLAGS=-I$(IDIR)
-LIBS=
+CFLAGS=-I$(IDIR) -lcurl
+LIBS=libcurl4-gnutls-dev
 ODIR=../obj
 
 DRV_FILES  := $(wildcard ../drivers/*.c)
