@@ -62,29 +62,8 @@ static irqreturn_t ece453_irq_handler(int irq, void *dev_id)
   int ret;
   int fsm_state = 0;
 
-  
-  //The user switched modes so update the page
-  //UPDATE_PAGE = true;
-
   // Read in the current state of the FSM
-  // ADD CODE
-//  fsm_state =  ioread32(base_addr + ECE453_STATUS_OFFSET);
   fsm_state =  ioread32(base_addr + ECE453_STATUS_OFFSET);
-  
-
-    // If state is equal to 1, change the direction of the LEDs from right to left
-  // ADD CODE
-  //If state is START
-	if(fsm_state == 0x01) {
-		iowrite32(0x01, base_addr + ECE453_CONTROL_OFFSET);
-	}
-  // If state is equal to 4, change the direction of the LEDs from left to right
-  
-  //If state is STOP
-  // ADD CODE
-	if(fsm_state == 0x02) {
-		iowrite32(0x00, base_addr + ECE453_CONTROL_OFFSET);
-	}
 
   // Clear the active interrupts, by writing 1 to that interrupt 
   // ADD CODE
@@ -112,26 +91,6 @@ static irqreturn_t ece453_irq_handler(int irq, void *dev_id)
   
   return IRQ_HANDLED;
 }
-
-/*****************************************************************************/
-/* Functions to handle web application updates                                                           */
-/*****************************************************************************/
-
-//This method issued a GET request to load the new session page for user 
-//bool new_session_page(void){
-
-	//Create a socket
-	
-	//Lookup IP address
-	
-	//Open the socket
-	
-	//Send the request based on which state the user is in message_ON = 4'd1;
-	//message_OFF = 4'd2;
-	
-	//Wait for the response
-//}
->>>>>>> 1909ea758d2ec8f5a2ac5898310c33427e7b255b
 
 
 /*****************************************************************************/
