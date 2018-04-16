@@ -23,9 +23,11 @@
 
 #define SIG_TEST 44 /* we define our own signal, hard coded since SIGRTMIN is different in user and in kernel space */ 
 
+#define I2C_ADDR 0x1C //I2C slave device address
+
 #define PID "/sys/kernel/ece453/pid"
 bool busy = true;
-
+int detect_touch(void);
 //*****************************************************************************
 // Helper function that is used to set the process ID of the user application
 // in kerenl space
@@ -109,6 +111,9 @@ void receiveData(int n, siginfo_t *info, void *unused)
     }
 
     curl_global_cleanup();
+    
+    //Print I2C value to console
+    detect_touch();
 }
 
 //*****************************************************************************
@@ -123,7 +128,33 @@ void control_c_handler(int n, siginfo_t *info, void *unused)
 
   busy = false;
 }
+//*****************************************************************************
+//  Determine which capactitive touch sensor is being pressed
+//*****************************************************************************
+int detect_touch(void){
+	char buffer[1];
+	int fd;
 
+	fd = open("/dev/i2c-2", O_RDONLY);
+
+	if (fd < 0) {
+		printf("Error opening file\n");
+		return 1;
+	}
+
+	if (ioctl(fd, I2C_SLAVE, I2C_ADDR) < 0) {
+		printf("ioctl error\n");
+		return 1;
+	}
+
+	buffer[0]=0xFF;
+	write(fd, buffer, 1);
+	
+	read(fd, buffer, 1);
+
+	printf("0x%02X\n", buffer[0]);
+	return 0;
+}
 
 //*****************************************************************************
 //*****************************************************************************

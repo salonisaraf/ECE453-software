@@ -13,6 +13,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/types.h>
+#include <linux/i2c-dev.h>
 
 #define CONTROL_REG	"/sys/kernel/ece453/control"
 #define DEVICE_ID_REG	"/sys/kernel/ece453/device_id"
