@@ -112,8 +112,6 @@ void receiveData(int n, siginfo_t *info, void *unused)
 
     curl_global_cleanup();
     
-    //Print I2C value to console
-    detect_touch();
 }
 
 //*****************************************************************************
@@ -152,8 +150,11 @@ int detect_touch(void){
 	
 	read(fd, buffer, 1);
 
+	if(fd != 0x3E){
 	printf("0x%02X\n", buffer[0]);
-	return 0;
+	}
+	close(fd);
+	return fd;
 }
 
 //*****************************************************************************
@@ -177,9 +178,6 @@ int main(int argc, char **argv)
   // the signal to
   set_pid();
 
-  // Enable the FSM.  The LED should move right to left
-//  ece453_reg_write(CONTROL_REG, 0x03);
-
   // enable reception of a signal the FSM reaches state 1 or 4. 
   ece453_reg_write(IM_REG, 0x01);
       
@@ -188,7 +186,12 @@ int main(int argc, char **argv)
 
   /* Loop forever, waiting for interrupts */
   while (busy) {
-	sleep(86400);	/* This will end early when we get an interrupt. */
+      	int cap_touch_sig = 8;
+      	//Print I2C value to console
+  	cap_touch_sig = detect_touch();
+   	// Write the capacitive touch values to the control register
+  	ece453_reg_write(CONTROL_REG, cap_touch_sig);
+//	sleep(86400);	/* This will end early when we get an interrupt. */
   }
 
   // The only way that the application gets here is if the user presses
