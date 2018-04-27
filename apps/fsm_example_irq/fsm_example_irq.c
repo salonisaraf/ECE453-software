@@ -132,6 +132,7 @@ void control_c_handler(int n, siginfo_t *info, void *unused)
 int detect_touch(void){
 	char buffer[1];
 	int fd;
+	int i2C_val;
 
 	fd = open("/dev/i2c-2", O_RDONLY);
 
@@ -150,11 +151,13 @@ int detect_touch(void){
 	
 	read(fd, buffer, 1);
 
-	if(fd != 0x3E){
-	printf("0x%02X\n", buffer[0]);
+	if(i2C_val != 0x3E){
+	printf("Value in detect touch 0x%02X\n", buffer[0]);
 	}
+
+	i2C_val = buffer[0];
 	close(fd);
-	return fd;
+	return i2C_val;
 }
 
 //*****************************************************************************
@@ -189,6 +192,8 @@ int main(int argc, char **argv)
       	int cap_touch_sig = 8;
       	//Print I2C value to console
   	cap_touch_sig = detect_touch();
+  	//Value returned from the i2c transactions
+  	printf("Value returned 0x%02X\n\r", cap_touch_sig);
    	// Write the capacitive touch values to the control register
   	ece453_reg_write(CONTROL_REG, cap_touch_sig);
 //	sleep(86400);	/* This will end early when we get an interrupt. */
